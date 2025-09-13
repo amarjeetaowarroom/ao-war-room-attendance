@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AO War Room Attendance - Electrosteel & Vedanta</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3c72">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="AO Attendance">
+    
+    <!-- Google APIs for Drive Integration -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <style>
+        /* Company Header Styling */
+        .company-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .company-logo {
+            height: 45px;
+            width: auto;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #1e3c72;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .app-title-main {
+            text-align: center;
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+        
+        .app-title-main h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .app-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        /* Enhanced Welcome Section */
+        .welcome-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+        
+        .welcome-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .company-info {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.1), rgba(42, 82, 152, 0.1));
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid rgba(30, 60, 114, 0.2);
+        }
+        
+        .company-info h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        /* Enhanced Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+        
+        .btn-enhanced {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            min-height: 70px;
+        }
+        
+        .btn-enhanced:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 60, 114, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .btn-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* Google Drive Status */
+        .drive-status {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #4285f4;
+        }
+        
+        .drive-status h4 {
+            margin: 0 0 10px 0;
+            color: #1e3c72;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ffa500;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.connected {
+            background: #27ae60;
+            animation: none;
+        }
+        
+        .status-dot.error {
+            background: #e74c3c;
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Info Cards Enhancement */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 20px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid #1e3c72;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-card h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .company-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .company-logo {
+                font-size: 10px;
+                height: 35px;
+                padding: 5px 10px;
+            }
+            
+            .app-title-main h1 {
+                font-size: 1.4rem;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-pulse {
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Company Header -->
+    <header class="company-header">
+        <div class="company-logo">
+            📊 ELECTROSTEEL<br>STEEL LIMITED
+        </div>
+        
+        <div class="app-title-main">
+            <h1>AO War Room Attendance</h1>
+            <div class="app-subtitle">Bokaro Steel Plant</div>
+        </div>
+        
+        <div class="company-logo">
+            ⚡ VEDANTA<br>LIMITED
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Screen -->
+        <div id="homeScreen" class="screen active">
+            <div class="container">
+                <div class="welcome-section">
+                    <div class="welcome-icon">🏢</div>
+                    <h2>Welcome to AO War Room</h2>
+                    <div class="company-info">
+                        <h3>Electrosteel Steel Limited & Vedanta Limited</h3>
+                        <p>Smart QR-based attendance system with cloud synchronization for seamless meeting management across all devices.</p>
+                    </div>
+                </div>
+                
+                <!-- Google Drive Status -->
+                <div class="drive-status">
+                    <h4>☁️ Cloud Storage Status</h4>
+                    <div id="driveStatus" class="status-indicator">
+                        <div class="status-dot loading-pulse"></div>
+                        <span class="status-text">Initializing Google Drive connection...</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="employeeBtn" class="btn-enhanced btn-primary">
+                        <span class="btn-icon">👤</span>
+                        <div>
+                            <div>Employee Registration</div>
+                            <small>Register for first time access</small>
+                        </div>
+                    </button>
+                    
+                    <button id="adminBtn" class="btn-enhanced btn-secondary">
+                        <span class="btn-icon">⚙️</span>
+                        <div>
+                            <div>Admin Dashboard</div>
+                            <small>Manage meetings & reports</small>
+                        </div>
+                    </button>
+                    
+                    <button id="scanBtn" class="btn-enhanced btn-accent">
+                        <span class="btn-icon">📷</span>
+                        <div>
+                            <div>Scan QR Code</div>
+                            <small>Mark your attendance</small>
+                        </div>
+                    </button>
+                    
+                    <button id="driveAuthBtn" class="btn-enhanced" style="background: linear-gradient(135deg, #4285f4, #34a853);">
+                        <span class="btn-icon">🔐</span>
+                        <div>
+                            <div>Connect Google Drive</div>
+                            <small>Enable cloud sync</small>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <h3>☁️ Google Drive Integration</h3>
+                        <p>All attendance data automatically synced to Google Drive. Access from any device with your credentials.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📍 Smart Location Verification</h3>
+                        <p>Attendance marked only when physically present in the conference room. GPS-based verification system.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📧 Automated Compliance Alerts</h3>
+                        <p>Email notifications sent automatically when attendance falls below 80%. Managers get notified for team compliance.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📱 Mobile-First Design</h3>
+                        <p>Optimized for Android devices. Install as PWA for native app experience. Works offline with cloud sync.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🏢 Multi-Company Support</h3>
+                        <p>Supports both Electrosteel Steel Limited and Vedanta Limited employees with unified attendance tracking.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📊 Real-Time Analytics</h3>
+                        <p>Live attendance percentage calculations, compliance monitoring, and comprehensive reporting dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Include all other screens from the original index.html -->
+        <!-- Employee Registration Screen -->
+        <div id="registrationScreen" class="screen">
+            <!-- Registration form content here -->
+        </div>
+
+        <!-- QR Scanner Screen -->
+        <div id="scannerScreen" class="screen">
+            <!-- Scanner content here -->
+        </div>
+
+        <!-- Admin Login Screen -->
+        <div id="adminLoginScreen" class="screen">
+            <!-- Admin login content here -->
+        </div>
+
+        <!-- Admin Dashboard Screen -->
+        <div id="adminDashboard" class="screen">
+            <!-- Dashboard content here -->
+        </div>
+    </main>
+
+    <!-- Enhanced Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Google Drive Connection Modal -->
+    <div id="driveModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔐 Google Drive Authentication</h3>
+                <button class="modal-close" onclick="hideDriveModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="auth-info">
+                    <p><strong>Why Google Drive?</strong></p>
+                    <ul>
+                        <li>✅ Secure cloud backup of all attendance data</li>
+                        <li>✅ Access from any device with your Google account</li>
+                        <li>✅ Automatic synchronization across all phones</li>
+                        <li>✅ Data safety and recovery</li>
+                    </ul>
+                    
+                    <div class="auth-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">
+                                <strong>Click "Authorize"</strong><br>
+                                Grant permission to access your Google Drive
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">
+                                <strong>Sign in with Google</strong><br>
+                                Use your existing Google account
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">
+                                <strong>Allow Access</strong><br>
+                                App will create a secure folder for attendance data
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-actions">
+                        <button id="authorizeBtn" class="btn-enhanced" style="background: #4285f4;">
+                            🔐 Authorize Google Drive Access
+                        </button>
+                        <button onclick="hideDriveModal()" class="btn-enhanced" style="background: #6c757d;">
+                            ⏭️ Skip for Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="qr-generator.js"></script>
+    <script src="google-drive.js"></script>
+    <script src="app.js"></script>
+
+    <!-- Enhanced PWA Installation -->
+    <script>
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install prompt
+            setTimeout(() => {
+                showInstallPrompt();
+            }, 3000);
+        });
+        
+        function showInstallPrompt() {
+            const toast = document.createElement('div');
+            toast.className = 'install-prompt';
+            toast.innerHTML = `
+                <div class="install-content">
+                    <strong>📱 Install AO Attendance App</strong>
+                    <p>Add to your home screen for better experience</p>
+                    <button onclick="installApp()" class="install-btn">Install Now</button>
+                    <button onclick="this.parentElement.parentElement.remove()" class="install-skip">Later</button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+        }
+        
+        async function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to install prompt: ${outcome}`);
+                deferredPrompt = null;
+                
+                document.querySelector('.install-prompt')?.remove();
+            }
+        }
+
+        // Enhanced Google Drive Integration
+        document.getElementById('driveAuthBtn').addEventListener('click', () => {
+            document.getElementById('driveModal').classList.add('active');
+        });
+        
+        document.getElementById('authorizeBtn').addEventListener('click', async () => {
+            if (window.googleDrive) {
+                const success = await window.googleDrive.authenticate();
+                if (success) {
+                    hideDriveModal();
+                    showToast('✅ Google Drive connected successfully!', 'success');
+                    updateDriveStatus('connected');
+                } else {
+                    showToast('❌ Failed to connect to Google Drive', 'error');
+                }
+            } else {
+                showToast('⚠️ Google Drive service not available', 'warning');
+            }
+        });
+        
+        function hideDriveModal() {
+            document.getElementById('driveModal').classList.remove('active');
+        }
+        
+        function updateDriveStatus(status) {
+            const statusElement = document.getElementById('driveStatus');
+            const statusDot = statusElement.querySelector('.status-dot');
+            const statusText = statusElement.querySelector('.status-text');
+            
+            switch(status) {
+                case 'connected':
+                    statusDot.className = 'status-dot connected';
+                    statusText.textContent = '✅ Google Drive connected and syncing';
+                    break;
+                case 'error':
+                    statusDot.className = 'status-dot error';
+                    statusText.textContent = '❌ Google Drive connection failed';
+                    break;
+                default:
+                    statusDot.className = 'status-dot loading-pulse';
+                    statusText.textContent = '🔄 Connecting to Google Drive...';
+            }
+        }
+        
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            
+            document.getElementById('toastContainer').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+        
+        // Initialize Google Drive on page load
+        window.addEventListener('load', async () => {
+            if (window.googleDrive) {
+                await window.googleDrive.init();
+                updateDriveStatus('ready');
+            } else {
+                updateDriveStatus('error');
+            }
+        });
+    </script>
+
+    <!-- Enhanced CSS for new components -->
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .auth-steps {
+            margin: 20px 0;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .step-number {
+            background: #1e3c72;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .auth-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .install-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .install-btn, .install-skip {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .install-btn {
+            background: #1e3c72;
+            color: white;
+        }
+        
+        .install-skip {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+        
+        .toast {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border-left: 4px solid #1e3c72;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .toast-success { border-left-color: #27ae60; }
+        .toast-error { border-left-color: #e74c3c; }
+        .toast-warning { border-left-color: #f39c12; }
+        
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker registered successfully');
+                    })
+                    .catch(function(registrationError) {
+                        console.log('❌ Service Worker registration failed:', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

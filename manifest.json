@@ -1,0 +1,114 @@
+{
+  "name": "AO War Room Attendance System",
+  "short_name": "AO Attendance",
+  "description": "QR-based attendance system with Google Drive cloud storage for AO War Room meetings",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8f9fa",
+  "theme_color": "#218BC5",
+  "categories": ["productivity", "business", "utilities"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iOCIgZmlsbD0iIzIxOEJDNSIvPgo8cGF0aCBkPSJNMTIgMTZIMzZWMjBIMTJWMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMjRIMzZWMjhIMTJWMjRaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMzJIMjhWMzZIMTJWMzJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMzIgMzJIMzZWMzZIMzJWMzJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
+      "sizes": "48x48",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTIiIGZpbGw9IiMyMThCQzUiLz4KPHA9InJlY3QiIHg9IjE4IiB5PSIyNCIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjE4IiB5PSIzNiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjE4IiB5PSI0OCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjQ4IiB5PSI0OCIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiMyMThCQzUiLz4KPHA9InJlY3QiIHg9IjI0IiB5PSIzMiIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjgiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjI0IiB5PSI0OCIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjgiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjI0IiB5PSI2NCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjgiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjY0IiB5PSI2NCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDE0NCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0IiByeD0iMjQiIGZpbGw9IiMyMThCQzUiLz4KPHA9InJlY3QiIHg9IjM2IiB5PSI0OCIgd2lkdGg9IjcyIiBoZWlnaHQ9IjEyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIzNiIgeT0iNzIiIHdpZHRoPSI3MiIgaGVpZ2h0PSIxMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMzYiIHk9Ijk2IiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9Ijk2IiB5PSI5NiIgd2lkdGg9IjEyIiBoZWlnaHQ9IjEyIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMzIiIGZpbGw9IiMyMThCQzUiLz4KPHA9InJlY3QiIHg9IjQ4IiB5PSI2NCIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjE2IiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI0OCIgeT0iOTYiIHdpZHRoPSI5NiIgaGVpZ2h0PSIxNiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iNDgiIHk9IjEyOCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjE2IiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIxMjgiIHk9IjEyOCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iODQiIGZpbGw9IiMyMThCQzUiLz4KPHA9InJlY3QiIHg9IjEyOCIgeT0iMTcwIiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjQyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIxMjgiIHk9IjI1NiIgd2lkdGg9IjI1NiIgaGVpZ2h0PSI0MiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMTI4IiB5PSIzNDIiIHdpZHRoPSIxNzAiIGhlaWdodD0iNDIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjM0MiIgeT0iMzQyIiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiIGZpbGw9IndoaXRlIi8+Cjx0ZXh0IHg9IjI1NiIgeT0iNDUwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iYm9sZCI+QU88L3RleHQ+Cjwvc3ZnPgo=",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjU2OCIgdmlld0JveD0iMCAwIDMyMCA1NjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iNTY4IiBmaWxsPSIjZjhmOWZhIi8+CjxyZWN0IHg9IjIwIiB5PSI4MCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MCIgcng9IjgiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjIwIiB5PSIxNDAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTAwIiByeD0iOCIgZmlsbD0iIzIxOEJDNSIvPgo8cmVjdCB4PSIyMCIgeT0iMjYwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEwMCIgcng9IjgiIGZpbGw9IiMzNDQ5NWUiLz4KPHJlY3QgeD0iMjAiIHk9IjM4MCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIxMDAiIHJ4PSI4IiBmaWxsPSIjZTc0YzNjIi8+CjwvcOdn+Cg==",
+      "sizes": "320x568",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "features": [
+    "Cross Platform",
+    "Offline Support",
+    "Cloud Sync",
+    "QR Code Generation",
+    "Location Verification",
+    "Real-time Analytics"
+  ],
+  "shortcuts": [
+    {
+      "name": "Scan QR Code",
+      "short_name": "Scan",
+      "description": "Quickly scan QR code for attendance",
+      "url": "/?action=scan",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiMyMThCQzUiLz4KPHBhdGggZD0iTTI0IDI0VjQwSDMyVjMySDQwVjI0SDI0WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTU2IDI0VjMySDY0VjQwSDcyVjI0SDU2WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTI0IDU2VjcySDQwVjY0SDMyVjU2SDI0WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTY0IDU2VjY0SDU2VjcySDcyVjU2SDY0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Employee Registration",
+      "short_name": "Register",
+      "description": "Register as an employee",
+      "url": "/?action=register",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiMzNDQ5NWUiLz4KPGNpcmNsZSBjeD0iNDgiIGN5PSIzNiIgcj0iMTIiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yNCA3MkM0OCA3MiA0OCA3MiA3MiA3MlY2NEMNMiA2NCA1MiA2NCA0OCA2NEMzNCA2NCAzNCA2NCAyNCA2NFY3MloiIGZpbGw9IndoaXRlIi8+CjwvcOdn+Cg==",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Admin Panel",
+      "short_name": "Admin",
+      "description": "Access admin dashboard",
+      "url": "/?action=admin",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiNlNzRjM2MiLz4KPGNpcmNsZSBjeD0iNDgiIGN5PSI0OCIgcj0iMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iNCIvPgo8Y2lyY2xlIGN4PSI0OCIgY3k9IjQ4IiByPSI4IiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
